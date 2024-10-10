@@ -19,6 +19,7 @@
   "homepage": "https://github.com/adiyatwn/fullstackopen-submission-part3#readme",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.21.1",
     "morgan": "^1.10.0"
   },
