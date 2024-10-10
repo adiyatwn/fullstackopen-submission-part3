@@ -1,4 +1,6 @@
 const express = require('express')
+const morgan = require('morgan')
+
 const app = express()
 
 app.use(express.json())
@@ -25,6 +27,13 @@ let persons = [
     "number": "39-23-6423122"
   }
 ]
+
+morgan.token('data', function getData(request) {
+  const body = request.body;
+  return JSON.stringify(body)
+})
+
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :data'))
 
 app.get('/api/persons', (request, response) => {
   return response.json(persons)
@@ -66,7 +75,7 @@ app.post('/api/persons', (request, response) => {
   }
 
   const person = {
-    id: randomId,
+    id: String(randomId),
     name: body.name,
     number: body.number
   }
