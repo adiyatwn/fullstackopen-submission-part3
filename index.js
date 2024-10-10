@@ -37,7 +37,7 @@ app.get('/api/persons/:id', (request, response, next) => {
 app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndDelete(request.params.id)
     .then(result => {
-      return response.status(204).end()
+      return response.json(result)
     })
     .catch(error => next(error))
 })
@@ -116,6 +116,8 @@ const errorHandler = (error, request, response, next) => {
 
   next(error)
 }
+
+app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
