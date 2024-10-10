@@ -23,7 +23,7 @@ const Person = mongoose.model('Person', personSchema)
 
 if (process.argv.length < 4) {
   Person.find({}).then(result => {
-    console.log("phonebook:");
+    console.log('phonebook:')
     result.forEach(person => {
       console.log(person.name, person.number)
     })

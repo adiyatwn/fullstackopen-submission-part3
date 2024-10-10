@@ -11,7 +11,7 @@ app.use(express.json())
 
 // logging stuffs
 morgan.token('data', function getData(request) {
-  const body = request.body;
+  const body = request.body
   return JSON.stringify(body)
 })
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :data'))
@@ -48,7 +48,7 @@ app.post('/api/persons', (request, response, next) => {
 
   if (!body.number || !body.name) {
     return response.status(400).json({
-      error: "name or number is missing"
+      error: 'name or number is missing'
     })
   }
 
@@ -107,7 +107,7 @@ app.get('/info', (request, response) => {
 })
 
 const unknownEndpoint = (request, response) => {
-  return response.status(404).json({ error: "Unknown endpoint" })
+  return response.status(404).json({ error: 'Unknown endpoint' })
 }
 
 app.use(unknownEndpoint)
@@ -115,11 +115,11 @@ app.use(unknownEndpoint)
 const errorHandler = (error, request, response, next) => {
   console.log(error.message)
 
-  if (error.name === "CastError") {
+  if (error.name === 'CastError') {
     return response.status(400).send({
-      error: "malformatted id"
+      error: 'malformatted id'
     })
-  } else if (error.name === "ValidationError") {
+  } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
   }
 
